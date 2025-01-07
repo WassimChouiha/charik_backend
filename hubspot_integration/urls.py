@@ -1,8 +1,8 @@
 from django.urls import path
-from . import views
+from .views import get_deals, get_contacts, LinkDealView
 
 urlpatterns = [
-    path('deals/', views.get_deals, name='get_deals'),
-    path('contacts/', views.get_contacts, name='get_contacts'),
-    path('link/', views.associate_deal_contact, name='associate_deal_contact'),
+    path('deals/', get_deals, name='get-deals'),
+    path('contacts/', get_contacts, name='get-contacts'),
+    path('link/', LinkDealView.as_view(), name='link-deal'),
 ]
