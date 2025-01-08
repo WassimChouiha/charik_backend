@@ -8,7 +8,7 @@ headers = {
         "Content-Type": "application/json",
     }
 def fetch_deals():
-    url = f"{HUBSPOT_BASE_URL}/deals/v1/deal/paged"
+    url = f"{HUBSPOT_BASE_URL}/crm/v3/objects/deals"
     
     try:
         response = requests.get(url, headers=headers)
@@ -19,7 +19,7 @@ def fetch_deals():
         raise Exception(f"Error fetching deals: {str(e)}")
 
 def fetch_contacts():
-    url = f"{HUBSPOT_BASE_URL}/contacts/v1/lists/all/contacts/all"
+    url = f"{HUBSPOT_BASE_URL}/crm/v3/objects/contacts"
     
     try:
         response = requests.get(url, headers=headers)
