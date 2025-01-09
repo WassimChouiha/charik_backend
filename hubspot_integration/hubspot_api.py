@@ -28,13 +28,14 @@ def fetch_contacts():
     except RequestException as e:
         raise Exception(f"Error fetching contacts: {str(e)}")
 
-def link_deal_to_contact(deal_id, contact_id):
-    url = f"{HUBSPOT_BASE_URL}/crm/v3/objects/contacts/{contact_id}/associations/0-3/{deal_id}/4"
-    
-    
+def link_objects(object_type_from, object_type_to, inputs):
+    url = f"{HUBSPOT_BASE_URL}/crm/v4/associations/{object_type_from}/{object_type_to}/batch/associate/default"
+    payload = {
+                "inputs": inputs
+            }
     try:
-        response = requests.put(url, headers=headers)
+        response = requests.post(url, headers=headers,json=payload)
         response.raise_for_status()
         return response.json()
     except RequestException as e:
-        raise Exception(f"Error linking deal to contact: {str(e)}")
+        raise Exception(f"Error linking {object_type_from} to {object_type_to}: {str(e)}")
