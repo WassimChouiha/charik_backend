@@ -26,19 +26,6 @@ def get_contacts(request):
         logger.error(f"Error fetching contacts: {e}", exc_info=True)
         return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-# class LinkDealView(APIView):
-#     def post(self, request, *args, **kwargs):
-#         try:
-#             deal_id = request.data.get("deal_id")
-#             contact_id = request.data.get("contact_id")
-#             if not deal_id or not contact_id:
-#                 return Response({"error": "Missing deal_id or contact_id"}, status=status.HTTP_400_BAD_REQUEST)
-            
-#             response = link_deal_to_contact(deal_id, contact_id)
-#             return Response(response, status=status.HTTP_200_OK)
-#         except Exception as e:
-#             logger.error(f"Error linking deal and contact: {e}", exc_info=True)
-#             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 class LinkObjectsView(APIView):
     def post(self, request, object_type_from, object_type_to, *args, **kwargs):
         try:
@@ -74,10 +61,3 @@ class LinkObjectsView(APIView):
             logger.error(f"Error linking {object_type_from} and {object_type_to}: {e}", exc_info=True)
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
-def my_view(request):
-    try:
-        result = 1 / 0  
-        return JsonResponse({'result': result})
-    except ZeroDivisionError as e:
-        logger.error(f"An error occurred: {e}", exc_info=True)
-        return JsonResponse({'error': 'An internal error occurred'}, status=500)
